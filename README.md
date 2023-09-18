@@ -1,1 +1,5 @@
-# Final-Project
+# Routine-Revive
+
+Developed by Isai Chaidez
+
+Routine Revive is a website built to help you create a daily routine that works for you and your lifestyle goals. Visit the website to go back and look at the routine you have built or adjust it whenever necessary. Set goals, intentions, and log your expereinces.
