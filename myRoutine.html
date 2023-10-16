@@ -33,7 +33,7 @@
       <label for="date">Date:</label>
       <input type="date" id="date">
       <br><br>
-      <label form="goals">Goals:</label><br>
+      <label for="goals">Goals:</label><br>
       <textarea id="goals" name="user_goals" placeholder="Input your personal goals"></textarea>
       <br><br>
       <label>Time of Routine:</label>
@@ -46,28 +46,28 @@
         <h2>Morning</h2>
         <br>
         <label for="wakeUp">Wake Up:</label>
-        <input type="time">
+        <input type="time" id="wakeTime">
         <br><br>
         <label for="breakfast">Breakfast:</label>
-        <input type="text" placeholder="Overnight Oats with Dates, cinnamon, and cardamom." size="50">
+        <input type="text" placeholder="Overnight Oats with Dates, cinnamon, and cardamom." size="50" id="breakfast">
         <br><br>
-        <label for="morningMindfullness">Mindfulness?</label><br>
-        <input type="radio" id="morningMindfullnessYes" name="morningMindfulnessAnswer" value="yes">
+        <label for="morningMindfulness">Mindfulness?</label><br>
+        <input type="radio" id="morningMindfulnessYes" name="morningMindfulnessAnswer" value="yes">
         <label for="yes">Yes</label><br>
-        <input type="radio" id="morningMindfullnessNo" name="morningMindfulnessAnswer" value="no">
+        <input type="radio" id="morningMindfulnessNo" name="morningMindfulnessAnswer" value="no">
         <label for="no">No</label>
         <br><br>
-        <div id="morningMindfullnessCheckbox" style="display: none;">
+        <div id="morningMindfulnessCheckbox" style="display: none;">
           <p>Choose any or all options to incorporate mindfulness into your routine.</p>
           <br>
           <label for="Meditation">Meditation:</label>
-          <input type="text" placeholder="Type, Time, Length | Example: Grounding meditation, 7:30am, 10 minutes." size="70">
+          <input type="text" placeholder="Type, Time, Length | Example: Grounding meditation, 7:30am, 10 minutes." size="70" id="morningMeditation">
           <br><br>
           <label for="Reading">Reading:</label>
-          <input type="text" placeholder="Time, Book, Length | Example: 8:30am, Journey Within, 1 hour" size="70">
+          <input type="text" placeholder="Time, Book, Length | Example: 8:30am, Journey Within, 1 hour" size="70" id="morningReading">
           <br><br>
           <label for="Physical">Physical:</label>
-          <input type="text" placeholder="Time, Type, Length | Example: 9:30am, Weights/Climbing/Yoga, 1 hour" size="70">
+          <input type="text" placeholder="Time, Type, Length | Example: 9:30am, Weights/Climbing/Yoga, 1 hour" size="70" id="morningPhysical">
         </div>
       </div>
       <div id="eveningForm" style="display:none">
@@ -75,31 +75,35 @@
         <h2>Evening</h2>
         <br>
         <label for="dinner">Dinner:</label>
-        <input type="text" placeholder="Kitchari with vitalizing greens 2 pieces of toast" size="50">
+        <input type="text" placeholder="Kitchari with vitalizing greens 2 pieces of toast" size="50" id="dinner">
         <br><br>
         <label for="sleep">Sleep:</label>
-        <input type="time">
+        <input type="time" id="sleep">
         <br><br>
-        <label for="eveningMindfullness">Mindfulness?</label><br>
-        <input type="radio" id="eveningMindfullnessYes" name="eveningMindfulnessAnswer" value="yes">
+        <label for="eveningMindfulness">Mindfulness?</label><br>
+        <input type="radio" id="eveningMindfulnessYes" name="eveningMindfulnessAnswer" value="yes">
         <label for="yes">Yes</label><br>
-        <input type="radio" id="eveningMindfullnessNo" name="eveningMindfulnessAnswer" value="no">
+        <input type="radio" id="eveningMindfulnessNo" name="eveningMindfulnessAnswer" value="no">
         <label for="no">No</label>
-        <div id="eveningMindfullnessCheckbox" style="display: none;">
+        <div id="eveningMindfulnessCheckbox" style="display: none;">
           <br>
           <p>Choose any or all options to incorporate mindfulness into your routine.</p>
           <br>
           <label for="Meditation">Meditation:</label>
-          <input type="text" placeholder="Type, Time, Length | Example: Grounding meditation, 9:30pm, 10 minutes." size="70">
+          <input type="text" placeholder="Type, Time, Length | Example: Grounding meditation, 9:30pm, 10 minutes." size="70" id="eveningMeditation">
           <br><br>
           <label for="Reading">Reading:</label>
-          <input type="text" placeholder="Time, Book, Length | Example: 10:00pm, Dune, 30 minutes" size="70">
+          <input type="text" placeholder="Time, Book, Length | Example: 10:00pm, Dune, 30 minutes" size="70" id="eveningReading">
           <br><br>
           <label for="phonedown">Phone Down:</label>
           <input type="time" name="phonedown" id="phonedown">
           <br><br>
         </div>
       </div>
+      <br>
+      <button id="saveFormButton">Save</button>
+      <button id="loadFormButton">Load Form</button>
+      <button id="deleteForm">Delete Form</button>
     </form>
   </main>
 
