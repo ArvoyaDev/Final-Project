@@ -1,76 +1,66 @@
 'use strict';
 
-/**
- * DONE Have the form update when certain parts are selected
- * DONE User can input and save routine into Local Storage
- * DONE Be able to edit previous routine
- * DONE Be able to start from scratch
- * DONE Be able to delete current routine from local storage
- */
-
+/*
+TODO Alert Users to put data in before trying to save
+TODO Have checkbox be auto checked when loading
+TODO Update HTML social network icons
+TODO Build separate example forms for others to browse
+TODO Change time of jsPDF so its not on military
+*/
 
 // * GLOBALS
+
+let formIDs = ['name', 'date', 'goals', 'wakeTime', 'breakfast', 'morningMeditation', 'morningReading', 'morningPhysical', 'dinner', 'sleep', 'eveningMeditation', 'eveningReading', 'phonedown'];
+
 
 //  * DOM WINDOWS
 
 // * CONSTRUCTOR FUNCTIONS
 
+function FormInput(formIDs) {
+  for (let i = 0; i < formIDs.length; i++) {
+    let HTMLelement = document.getElementById(formIDs[i]);
+
+    if (HTMLelement) {
+      if (HTMLelement.type === 'checkbox' || HTMLelement.type === 'radio') {
+        this[formIDs[i]] = HTMLelement.checked;
+      } else {
+        this[formIDs[i]] = HTMLelement.value || null;
+      }
+    } else {
+      this[formIDs[i]] = null;
+    }
+  }
+}
+
 // * HELPER FUNCTIONS
 
 function saveForm() {
-
-  let formInput = {
-    name: document.getElementById('name').value,
-    date: document.getElementById('date').value,
-    goals: document.getElementById('goals').value,
-    morningCheckbox: document.getElementById('morning').checked,
-    eveningCheckbox: document.getElementById('evening').checked,
-    wakeTime: document.getElementById('wakeTime').value,
-    breakfast: document.getElementById('breakfast').value,
-    morningMindfulnessYes: document.getElementById('morningMindfulnessYes').checked,
-    morningMindfulnessNo: document.getElementById('morningMindfulnessNo').checked,
-    morningMeditation: document.getElementById('morningMeditation').value,
-    morningReading: document.getElementById('morningReading').value,
-    morningPhysical: document.getElementById('morningPhysical').value,
-    dinner: document.getElementById('dinner').value,
-    sleep: document.getElementById('sleep').value,
-    eveningMindfulnessYes: document.getElementById('eveningMindfulnessYes').checked,
-    eveningMindfulnessNo: document.getElementById('eveningMindfulnessNo').checked,
-    eveningMeditation: document.getElementById('eveningMeditation').value,
-    eveningReading: document.getElementById('eveningReading').value,
-    phonedown: document.getElementById('phonedown').value
-  };
-
+  let formInput = new FormInput(formIDs);
   let formInputString = JSON.stringify(formInput);
   localStorage.setItem('myRoutineData', formInputString);
+  alert('Your form has been saved to local storage!');
 }
 
 function loadForm() {
-
   let storedFormInputString = localStorage.getItem('myRoutineData');
 
   if (storedFormInputString) {
     let storedFormInput = JSON.parse(storedFormInputString);
 
-    document.getElementById('name').value = storedFormInput.name;
-    document.getElementById('date').value = storedFormInput.date;
-    document.getElementById('goals').value = storedFormInput.goals;
-    document.getElementById('morning').checked = storedFormInput.morning;
-    document.getElementById('evening').checked = storedFormInput.evening;
-    document.getElementById('wakeTime').value = storedFormInput.wakeTime;
-    document.getElementById('breakfast').value = storedFormInput.breakfast;
-    document.getElementById('morningMindfulnessYes').checked = storedFormInput.morningMindfulnessYes;
-    document.getElementById('morningMindfulnessNo').checked = storedFormInput.morningMindfulnessNo;
-    document.getElementById('morningMeditation').value = storedFormInput.morningMeditation;
-    document.getElementById('morningReading').value = storedFormInput.morningReading;
-    document.getElementById('morningPhysical').value = storedFormInput.morningPhysical;
-    document.getElementById('dinner').value = storedFormInput.dinner;
-    document.getElementById('sleep').value = storedFormInput.sleep;
-    document.getElementById('eveningMindfulnessYes').checked = storedFormInput.eveningMindfulnessYes;
-    document.getElementById('eveningMindfulnessNo').checked = storedFormInput.eveningMindfulnessNo;
-    document.getElementById('eveningMeditation').value = storedFormInput.eveningMeditation;
-    document.getElementById('eveningReading').value = storedFormInput.eveningReading;
-    document.getElementById('phonedown').value = storedFormInput.phonedown;
+    for (let i = 0; i < formIDs.length; i++) {
+      let HTMLelement = document.getElementById(formIDs[i]);
+      if (HTMLelement) {
+        if (HTMLelement.type === 'checkbox' || HTMLelement.type === 'radio') {
+          HTMLelement.checked = storedFormInput[formIDs[i]];
+        } else {
+          HTMLelement.value = storedFormInput[formIDs[i]] || '';
+        }
+      }
+    }
+    alert('Form has been loaded, remember to check off morning or evening as well as if you want mindfulness or not!');
+  } else {
+    alert('No form found!');
   }
 }
 
@@ -84,14 +74,43 @@ function deleteForm() {
     alert('Your form has been deleted from local storage.');
 
   } else if (areYouSure.toLowerCase() === 'no'){
-    return;
+    alert('Nothing has been deleted!');
   } else {
     alert('please answer with a yes or no');
     deleteForm();
   }
 
-
 }
+
+// ! Big Help from ChatGPT
+function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  let formInputString = localStorage.getItem('myRoutineData');
+
+  if (formInputString) {
+    let formInput = JSON.parse(formInputString);
+
+    doc.text('Routine Form', 10, 10);
+
+    let yPosition = 20;  // Initialize y-position for text
+
+    for (const [key, value] of Object.entries(formInput)) {
+      if (value !== false && value !== null && value !== '') {
+        doc.text(`${key}: ${value}`, 10, yPosition);
+        yPosition += 10; // Increment y-position
+      }
+    }
+
+    // Save the PDF
+    doc.save('routine-form.pdf');
+  } else {
+    alert('Save your form to print!');
+  }
+}
+
+
 
 // * EVENT HANDLERS
 
@@ -135,8 +154,13 @@ document.querySelectorAll('input[name="eveningMindfulnessAnswer"]').forEach(func
   });
 });
 
+
 document.getElementById('saveFormButton').addEventListener('click', saveForm);
+
+document.getElementById('generatePDF').addEventListener('click', generatePDF);
+
 document.getElementById('loadFormButton').addEventListener('click', loadForm);
+
 document.getElementById('deleteForm').addEventListener('click', deleteForm);
 
 // * EXECUTABLE CODE
