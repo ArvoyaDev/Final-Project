@@ -22,6 +22,7 @@
   </header>
 
   <main>
+    <br>
     <h2 id="MyRoutine">My Routine</h2>
     <br>
     <form action="local-storage" id="myRoutine">
@@ -40,8 +41,8 @@
         <label for="morning">Morning</label>
         <input type="checkbox" id="evening">
         <label for="evening">Evening</label><br>
-        <hr>
-      <div id="morningForm">
+        <div id="morningForm" style="display:none">
+          <hr>
         <h2>Morning</h2>
         <br>
         <label for="wakeUp">Wake Up:</label>
@@ -50,13 +51,13 @@
         <label for="breakfast">Breakfast:</label>
         <input type="text" placeholder="Overnight Oats with Dates, cinnamon, and cardamom." size="50">
         <br><br>
-        <label for="Mindfullness">Mindfulness?</label><br>
-        <input type="radio" name="MindfulnessAnswer" value="yes">
+        <label for="morningMindfullness">Mindfulness?</label><br>
+        <input type="radio" id="morningMindfullnessYes" name="morningMindfulnessAnswer" value="yes">
         <label for="yes">Yes</label><br>
-        <input type="radio" name="MindfulnessAnswer" value="no">
+        <input type="radio" id="morningMindfullnessNo" name="morningMindfulnessAnswer" value="no">
         <label for="no">No</label>
         <br><br>
-        <div id="mindfullnessCheckbox">
+        <div id="morningMindfullnessCheckbox" style="display: none;">
           <p>Choose any or all options to incorporate mindfulness into your routine.</p>
           <br>
           <label for="Meditation">Meditation:</label>
@@ -69,8 +70,8 @@
           <input type="text" placeholder="Time, Type, Length | Example: 9:30am, Weights/Climbing/Yoga, 1 hour" size="70">
         </div>
       </div>
-      <hr>
-      <div id="eveningForm">
+      <div id="eveningForm" style="display:none">
+        <hr>
         <h2>Evening</h2>
         <br>
         <label for="dinner">Dinner:</label>
@@ -79,12 +80,12 @@
         <label for="sleep">Sleep:</label>
         <input type="time">
         <br><br>
-        <label for="Mindfullness">Mindfulness?</label><br>
-        <input type="radio" name="MindfulnessAnswer" value="yes">
+        <label for="eveningMindfullness">Mindfulness?</label><br>
+        <input type="radio" id="eveningMindfullnessYes" name="eveningMindfulnessAnswer" value="yes">
         <label for="yes">Yes</label><br>
-        <input type="radio" name="MindfulnessAnswer" value="no">
+        <input type="radio" id="eveningMindfullnessNo" name="eveningMindfulnessAnswer" value="no">
         <label for="no">No</label>
-        <div>
+        <div id="eveningMindfullnessCheckbox" style="display: none;">
           <br>
           <p>Choose any or all options to incorporate mindfulness into your routine.</p>
           <br>
@@ -101,8 +102,24 @@
       </div>
     </form>
   </main>
-  <footer>
 
+  <footer>
+    <div class="footer-content">
+      <div class="contact-info">
+        <p>Email: contact@routinerevive.com</p>
+      </div>
+      <div class="social-icons">
+        <!-- Replace # with the actual links to your social profiles -->
+        <a href="#"><img src="path-to-facebook-icon" alt="Facebook Icon"></a>
+        <a href="#"><img src="path-to-instagram-icon" alt="Instagram Icon"></a>
+        <a href="#"><img src="path-to-twitter-icon" alt="Twitter Icon"></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 Routine Revive - All Rights Reserved.</p>
+    </div>
   </footer>
+  
+  <script src="Script/app.js"></script>
 </body>
 </html>

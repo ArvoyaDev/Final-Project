@@ -82,3 +82,46 @@ h2, h3 {
 main {
   line-height:normal;
 }
+
+footer {
+  background-color: #12486B;
+  color: #F5FCCD;
+  padding: 20px 0;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 150px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-links ul {
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links ul li a {
+  color: #F5FCCD;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+  color: #78D6C6;
+}
+
+.contact-info p {
+  margin: 0;
+}
+
+.social-icons a {
+  margin-right: 10px; /* space between icons */
+}
+
+.footer-bottom {
+  margin-top: 20px;
+  text-align: center;
+}
