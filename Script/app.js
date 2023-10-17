@@ -1,11 +1,11 @@
 'use strict';
 
 /*
+DONE Update HTML social network icons
+DONE Change time of jsPDF so its not on military
+DONE Build separate example forms for others to browse
 TODO Alert Users to put data in before trying to save
 TODO Have checkbox be auto checked when loading
-TODO Update HTML social network icons
-TODO Build separate example forms for others to browse
-TODO Change time of jsPDF so its not on military
 */
 
 // * GLOBALS
@@ -92,14 +92,47 @@ function generatePDF() {
   if (formInputString) {
     let formInput = JSON.parse(formInputString);
 
+    doc.setFontSize(22);
     doc.text('Routine Form', 10, 10);
 
-    let yPosition = 20;  // Initialize y-position for text
+    let yPosition = 30;  // Initialize y-position for text
+    doc.setFontSize(12); // Reduce font size for body
 
     for (const [key, value] of Object.entries(formInput)) {
       if (value !== false && value !== null && value !== '') {
-        doc.text(`${key}: ${value}`, 10, yPosition);
+        let formattedKey = key.charAt(0).toUpperCase() + key.slice(1).replaceAll(/([A-Z])/g, ' $1');
+        let formattedValue = value;
+
+        // Convert military time to standard time if applicable
+        if (/^\d{2}:\d{2}$/.test(value)) {
+          let [hour, minute] = value.split(':');
+          let period = 'AM';
+          if (hour >= 12) {
+            period = 'PM';
+            hour -= 12;
+          }
+          formattedValue = `${hour}:${minute} ${period}`;
+        }
+
+        // Convert YYYY-MM-DD to MM/DD/YYYY if applicable
+        if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+          let [year, month, day] = value.split('-');
+          formattedValue = `${month}/${day}/${year}`;
+        }
+
+        let text = `${formattedKey}: ${formattedValue}`;
+
+        // Wrap text within a 180-point boundary
+        doc.text(text, 10, yPosition, {
+          maxWidth: 180
+        });
+
         yPosition += 10; // Increment y-position
+
+        if (yPosition > 270) { // If near bottom of page, create new page
+          doc.addPage();
+          yPosition = 10; // Reset y-position for new page
+        }
       }
     }
 
@@ -109,6 +142,10 @@ function generatePDF() {
     alert('Save your form to print!');
   }
 }
+
+
+
+
 
 
 
