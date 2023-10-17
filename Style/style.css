@@ -83,6 +83,22 @@ main {
   line-height:normal;
 }
 
+#first2 {
+  display: flex;
+  justify-content: space-between;
+  margin: 60px;
+}
+
+#single {
+  display: flex;
+  justify-content: center;
+}
+
+.example {
+  font-weight: 600;
+}
+
+
 footer {
   background-color: #12486B;
   color: #F5FCCD;
